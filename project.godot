@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Bob"
-run/main_scene="uid://cq23ci2osp567"
+run/main_scene="uid://dpvric3thx8mu"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

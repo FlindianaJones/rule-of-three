@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dpvric3thx8mu"]
+
+[ext_resource type="Script" uid="uid://b11xwbnvd436a" path="res://Tutorial/Scripts/Menu.cs" id="1_loh6v"]
+[ext_resource type="Texture2D" uid="uid://bvg4xsfllydrt" path="res://Tutorial/Sprites/menu_background.png" id="1_ovhwb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_loh6v"]
+font_size = 38
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="Menu" type="Control" unique_id=834432450]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_loh6v")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1121204842]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ovhwb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1980056845]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.0
+offset_top = -305.0
+offset_right = 206.0
+offset_bottom = 294.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="VBoxContainer" unique_id=1128426701]
+layout_mode = 2
+text = "3D Platformer Tutorial"
+label_settings = SubResource("LabelSettings_loh6v")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=359073649]
+custom_minimum_size = Vector2(108, 54)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Play"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=874908955]
+custom_minimum_size = Vector2(108, 54)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="OnQuitButtonPressed"]

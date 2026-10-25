@@ -25,6 +25,17 @@ public partial class player_controller : CharacterBody3D
 	[Signal] // These have to be public, or you can't event subscribe to them!
 	public delegate void OnUpdateScoreEventHandler(int score);
 
+	public AudioStreamPlayer Audio;
+	public readonly AudioStream CoinSFX = ResourceLoader.Load<AudioStream>("res://Tutorial/Audio/coin.wav");
+
+	public readonly AudioStream TakeDamageSFX = ResourceLoader.Load<AudioStream>("res://Tutorial/Audio/take_damage.wav");
+
+    public override void _Ready()
+    {
+        Audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+    }
+
+
     public override void _Process(double delta)
     {
         if (GlobalPosition.Y < -5)
@@ -55,6 +66,7 @@ public partial class player_controller : CharacterBody3D
 	{
 		health -= amount;
 		EmitSignal(SignalName.OnTakeDamage, health);
+		PlaySound(TakeDamageSFX);
 		if (health <=0)
 		{
 			GameOver();
@@ -64,12 +76,19 @@ public partial class player_controller : CharacterBody3D
 	public void GameOver()
 	{
 		PlayerStats.Instance.Score = 0;
-		GetTree().ReloadCurrentScene();
+		Callable.From(() => { GetTree().ChangeSceneToFile("res://Tutorial/Scenes/menu.tscn"); }).CallDeferred();
 	}
 
 	public void IncreaseScore(int amount)
 	{
 		PlayerStats.Instance.Score += amount;
 		EmitSignal(SignalName.OnUpdateScore, PlayerStats.Instance.Score);
+		PlaySound(CoinSFX);
+	}
+
+	public void PlaySound(AudioStream sound)
+	{
+		Audio.Stream = sound;
+		Audio.Play();
 	}
 }

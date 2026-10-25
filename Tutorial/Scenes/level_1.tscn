@@ -11,21 +11,24 @@
 [ext_resource type="PackedScene" uid="uid://v8ntwymc6ddf" path="res://Tutorial/Scenes/coin.tscn" id="9_5hikx"]
 [ext_resource type="Texture2D" uid="uid://bcl8x7q7od6h6" path="res://Tutorial/Sprites/hud_heartFull.png" id="10_no7bm"]
 [ext_resource type="Script" uid="uid://c4fvfkah4yga0" path="res://Tutorial/Scripts/PlayerUI.cs" id="10_nuw0c"]
+[ext_resource type="PackedScene" uid="uid://c3rt4yxst31vw" path="res://Tutorial/Scenes/end_flag.tscn" id="12_61oxv"]
+[ext_resource type="PackedScene" uid="uid://dubkdmvqovm3v" path="res://Tutorial/Scenes/level_2.tscn" id="13_0wgav"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dibpl"]
 
-[sub_resource type="Sky" id="Sky_gaftu"]
+[sub_resource type="Sky" id="Sky_0wgav"]
 sky_material = SubResource("ProceduralSkyMaterial_dibpl")
 
 [sub_resource type="Environment" id="Environment_udsvs"]
 background_mode = 2
-sky = SubResource("Sky_gaftu")
+sky = SubResource("Sky_0wgav")
 ambient_light_source = 2
 ambient_light_color = Color(0.9689285, 0.4408169, 1, 1)
 ssao_enabled = true
+fog_enabled = true
 fog_light_color = Color(0.887053, 0.36746854, 0.9999985, 1)
 fog_light_energy = 1.2
-fog_density = 0.02
+fog_density = 0.04
 adjustment_enabled = true
 adjustment_contrast = 1.2
 adjustment_saturation = 1.2
@@ -184,3 +187,7 @@ MoveDirection = Vector3(0, 2, -2)
 [node name="Enemy2" parent="Hazards" unique_id=1284212348 instance=ExtResource("8_83foo")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3.005066, 1.9255981, -6.9143677)
 MoveDirection = Vector3(0, 2, 2)
+
+[node name="EndFlag" parent="." unique_id=243822317 instance=ExtResource("12_61oxv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.53429747, 4.1634803, -5.8508153)
+SceneToLoad = ExtResource("13_0wgav")
