@@ -19,7 +19,7 @@ public partial class PlayerController : CharacterBody3D
 	public int health = 3;
 
 	[Export]
-	public float LookSpeed = 0.01f;
+	public float LookSpeed = 0.1f;
 
 	[Signal] // These also have to end in "EventHandler" in order for the magic to happen
 	public delegate void OnTakeDamageEventHandler(int hp);
@@ -33,7 +33,7 @@ public partial class PlayerController : CharacterBody3D
     {
         Audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		Pivot = GetNode<Node3D>("Pivot");
-		Input.MouseMode = Input.MouseModeEnum.ConfinedHidden;
+		Input.MouseMode = Input.MouseModeEnum.Captured;
     }
 
 
@@ -49,21 +49,21 @@ public partial class PlayerController : CharacterBody3D
     {
         if(@event is InputEventMouseMotion eventMouseMotion && Input.MouseMode != Input.MouseModeEnum.Visible)
 		{
-			this.GlobalRotate(Vector3.Down, Mathf.DegToRad(LookSpeed * eventMouseMotion.ScreenVelocity.X));
-			Pivot.Rotate(Vector3.Right, Mathf.DegToRad(LookSpeed * eventMouseMotion.ScreenVelocity.Y));
+			this.GlobalRotate(Vector3.Down, Mathf.DegToRad(LookSpeed * eventMouseMotion.ScreenRelative.X));
+			Pivot.Rotate(Vector3.Right, Mathf.DegToRad(LookSpeed * -eventMouseMotion.ScreenRelative.Y));
 		}
 		else if (@event is InputEventMouseButton eventMouseButton && eventMouseButton.ButtonIndex == MouseButton.Left)
 		{
-			if (Input.MouseMode != Input.MouseModeEnum.ConfinedHidden)
+			if (Input.MouseMode != Input.MouseModeEnum.Captured)
 			{
-				Input.MouseMode = Input.MouseModeEnum.ConfinedHidden;
+				Input.MouseMode = Input.MouseModeEnum.Captured;
 			}
 		}
     }
 
     public override void _UnhandledKeyInput(InputEvent @event)
 	{
-		if(Input.IsActionJustPressed("escape_mouse") && Input.MouseMode == Input.MouseModeEnum.ConfinedHidden)
+		if(Input.IsActionJustPressed("escape_mouse") && Input.MouseMode == Input.MouseModeEnum.Captured)
 		{
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
@@ -81,7 +81,7 @@ public partial class PlayerController : CharacterBody3D
 			VerticalSpeed = JumpForce;
 		}
 		// Implement Movement
-		Vector2 MoveInput =  Input.GetVector("strafe_right", "strafe_left", "move_back", "move_forward").Normalized();
+		Vector2 MoveInput =  Input.GetVector("strafe_left", "strafe_right", "move_forward", "move_back").Normalized();
 		Vector3 MoveDir = new Vector3(MoveInput.X * MoveSpeed * (float)delta, 0, MoveInput.Y * MoveSpeed * (float)delta);
 		TranslateObjectLocal(MoveDir);
 		Velocity = new(Velocity.X, (float)VerticalSpeed, Velocity.Z);

@@ -44,6 +44,12 @@ points = PackedVector3Array(-1, 0.15413707, -0.65635407, 1.0222061, 0.37558168, 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6tn7i"]
 points = PackedVector3Array(0.8296298, 0.01920978, 0.9571729, -0.7970968, 1.8686998, -1.0204437, -0.9581575, 1.9021604, 0.926339, 0.9918692, 2, 0.7358836, -0.73824334, 0.013319174, -0.99504983, 0.9292112, 0.015122563, -0.8970933, -0.99504983, 0.013319174, 0.73824334, 0.89584965, 2, -0.927923, -0.9918692, 2, -0.7358836, 0.767589, 1.9032599, 1.023452, -0.73824334, 0.013319174, 0.99504983, -0.99504983, 0.013319174, -0.73824334, 0.99504983, 0.013319174, 0.73824334, 1.023452, 1.9032599, -0.767589, 0.7675917, 1.9032631, -1.0234557, -0.7358836, 2, 0.9918692, -1.023452, 1.9032599, 0.767589, 0.73824334, 0.013319174, -0.99504983, 0.99504983, 0.013319174, -0.73824334, 1.0204407, 1.8686972, 0.7970944, -1.0204407, 1.8686972, -0.7970944, -0.7674285, 1.9033064, 1.0235052, 0.73824334, 0.013319174, 0.99504983, -0.92915386, 0.014969299, -0.89723176, -0.7358836, 2, -0.9918692, 0.9581575, 1.9021604, 0.926339, -0.8970933, 0.015122563, 0.9292112, 0.7358836, 2, 0.9918692, -0.9918692, 2, 0.7358836, 0.92634267, 1.902164, -0.9581613, -0.9261835, 1.9022036, -0.95820373, 0.9292112, 0.015122563, 0.8970933)
 
+[sub_resource type="BoxMesh" id="BoxMesh_udsvs"]
+size = Vector3(0.161, 5, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_udsvs"]
+size = Vector3(0.161, 5, 5)
+
 [node name="DemoLevel" type="Node3D" unique_id=1273087481]
 
 [node name="Environment" type="Node" parent="." unique_id=611447579]
@@ -59,6 +65,7 @@ shadow_blur = 3.0
 [node name="Platforms" type="Node" parent="." unique_id=1028941166]
 
 [node name="PlatformLowLarge" type="StaticBody3D" parent="Platforms" unique_id=897166903]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/PlatformLowLarge" unique_id=1944652108]
 shape = SubResource("ConvexPolygonShape3D_rknok")
@@ -110,6 +117,15 @@ mesh = ExtResource("6_y2mi2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/BlockGrassLargeTall/StaticBody3D" unique_id=9073112]
 shape = SubResource("ConvexPolygonShape3D_6tn7i")
+
+[node name="CameraDemoWall" type="StaticBody3D" parent="Platforms" unique_id=1634666582]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0617232, 2.9605818, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/CameraDemoWall" unique_id=1569671374]
+mesh = SubResource("BoxMesh_udsvs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/CameraDemoWall" unique_id=1393354796]
+shape = SubResource("BoxShape3D_udsvs")
 
 [node name="Player" parent="." unique_id=1004737373 instance=ExtResource("7_8723o")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.06887174, 1, 0.09957361)
