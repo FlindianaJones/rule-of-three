@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://cl8vwqeqgtdjp"]
+
+[ext_resource type="Script" uid="uid://bbps3nndeylnn" path="res://Scripts/MainMenu.cs" id="1_853f1"]
+[ext_resource type="Texture2D" uid="uid://bvg4xsfllydrt" path="res://Tutorial/Sprites/menu_background.png" id="2_8saeu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ghw46"]
+font_size = 38
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Control" unique_id=551020011]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_853f1")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1287339216]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8saeu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=548296195]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.0
+offset_top = -305.0
+offset_right = 206.0
+offset_bottom = 294.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="VBoxContainer" unique_id=1898464766]
+layout_mode = 2
+text = "Bob"
+label_settings = SubResource("LabelSettings_ghw46")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=34815505]
+custom_minimum_size = Vector2(108, 54)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Play"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=1093248139]
+custom_minimum_size = Vector2(108, 54)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="OnQuitButtonPressed"]
